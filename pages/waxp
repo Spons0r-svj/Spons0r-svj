@@ -1,0 +1,133 @@
+<html><head>
+        <title>Bot</title>
+
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+
+        <link rel="stylesheet" href="css/waxp.css">
+
+        <script type="text/javascript" src="js/main.js"></script>
+        <script type="text/javascript" src="js/waxp.js"></script>
+        <script type="text/javascript" src="js/html2canvas.js"></script>
+    </head>
+
+    <body>
+        <div class="container">
+            <div class="app_left">
+                <div class="menu">
+                    <a class="menu_btn" href="/position.html">Position</a>
+                    <a class="menu_btn" href="/pages/pnl">P&L / ROI</a>
+                    <a class="menu_btn" href="/pages/balance">Balance</a>
+                    <a class="menu_btn" href="/pages/bot">Bot</a>
+                    <a class="menu_btn" href="/pages/withdrawal">Withdrawal</a>
+                    <a class="menu_btn current" href="/pages/waxp">WAXP</a>
+                </div>
+            </div>
+
+            <div class="app_center">
+                <form class="form" name="form">
+                    <div class="section_select waxp_section_select">
+                        <label>WAXP section:</label>
+                        <select name="waxp_section" onchange="changeWaxpSection()">
+                            <option value="withdraw">Withdraw</option>
+                            <option value="progress">Progess</option>
+                        </select>
+                    </div>
+                    <div class="waxp_form_withdraw current" id="waxp_form_withdraw">
+                        <div>
+                            <label>iPhone time:</label>
+                            <input type="time" name="iphone_time" value="" placeholder="">
+                        </div>
+                        <div>
+                            <label>iPhone battery:</label>
+                            <select name="iphone_battery">
+                                <option value="10">10</option>
+                                <option value="50">50</option>
+                                <option value="90">90</option>
+                            </select>
+                            <label>%</label>
+                        </div>
+                        <div>
+                            <label>Address:</label>
+                            <input type="text" name="address" value="waxnetmobile" placeholder="">
+                        </div>
+
+                        <div>
+                            <label>Memo (Tag):</label>
+                            <input type="text" name="memo" value="" placeholder="">
+                        </div>
+
+                        <div>
+                            <label>WAXP amount:</label>
+                            <input type="text" name="amount" value="" placeholder="1234.5678">
+                        </div>
+
+                        <div>
+                            <label>Available WAXP balance:</label>
+                            <input type="text" name="available" value="" placeholder="1234.5678">
+                        </div>
+
+                        <div>
+                            <label>Withdraw date/time:</label>
+                            <input type="date" name="withdraw_date" value="" placeholder="">
+                            <input type="time" step="1" name="withdraw_time" value="" placeholder="">
+                        </div>
+                    </div>
+                    <div class="waxp_form_progress" id="waxp_form_progress">
+                        <div>
+                            <label>Progress:</label>
+                            <input type="text" name="progress_percentage" value="">
+                            <label>%</label>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <div class="app_right">
+                <div class="form_buttons">
+                    <button type="button" onclick="saveScreenshot()" class="get_ss_btn">Save Screenshot</button>
+                </div>
+                <div class="calculation_results">
+                </div>
+            </div>
+        </div>
+
+
+        <div class="waxp_images">
+            <div class="waxp_image_withdraw current" id="waxp_image_withdraw">
+                <div class="waxp_image_withdraw_form" id="screenshot_withdraw">
+                    <div class="top_bar">
+                        <span class="iphone_time" id="iphone_time">11:34</span>
+                        <div class="iphone_icons" id="iphone_icons"></div>
+                    </div>
+                    <span class="address_iphone" id="withdraw_adress">waxnetmobile</span>
+                    <span class="memo_iphone" id="withdraw_memo">10650146730</span>
+                    <span class="iphone_available_1" id="withdraw_available_1">3,431.53006065</span>
+                    <span class="iphone_amount" id="withdraw_amount">3429.53006065</span>
+                    <span class="iphone_available_2" id="withdraw_available_2">3,431.53006065</span>
+                    <span class="iphone_total_amount" id="withdraw_total_amount">3,429.53006065 WAXP</span>
+                </div>
+                <div class="waxp_image_withdraw_details" id="screenshot_withdrawal_details">
+                    <span class="details_amount" id="withdrawal_details_amount">3,429.53006065 WAXP</span>
+                    <span class="details_datetime" id="withdrawal_details_datetime">2024-09-06 13:38:27</span>
+                    <span class="details_address" id="withdrawal_details_address">waxnetmobile</span>
+                </div>
+                <div class="waxp_image_email" id="screenshot_email">
+                    <span class="email_amount" id="email_amount">3429.53006065</span>
+                    <span class="email_address" id="email_address">waxnetmobile</span>
+                    <span class="email_memo" id="email_memo">(memo:10650146730)</span>
+                </div>
+            </div>
+            <div class="waxp_image_progress" id="waxp_image_progress">
+                <span class="progress_percentage" id="progress_percentage">3%</span>
+            </div>
+        </div>
+
+
+</body></html>

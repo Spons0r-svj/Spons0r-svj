@@ -1,0 +1,109 @@
+<html><head>
+        <title>P&L / ROI</title>
+
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+
+        <link rel="stylesheet" href="css/pnl.css">
+
+        <script type="text/javascript" src="js/main.js"></script>
+        <script type="text/javascript" src="js/pnl.js"></script>
+        <script type="text/javascript" src="js/html2canvas.js"></script>
+    </head>
+
+    <body>
+        <div class="container">
+            <!-- Меню сайта -->
+            <div class="app_left">
+                <div class="menu">
+                    <a class="menu_btn" href="/position.html">Position</a>
+                    <a class="menu_btn current" href="/pages/pnl">P&L / ROI</a>
+                    <a class="menu_btn" href="/pages/balance">Balance</a>
+                    <a class="menu_btn" href="/pages/bot">Bot</a>
+                    <a class="menu_btn" href="/pages/withdrawal">Withdrawal</a>
+                    <a class="menu_btn" href="/pages/waxp">WAXP</a>
+                </div>
+            </div>
+
+            <!-- Форма с полями ввода -->
+            <div class="app_center">
+                <form class="form" name="form">
+                    <div>
+                        <label>Type:</label>
+                        <select name="template_type">
+                            <option value="roi">ROI (%)</option>
+                            <option value="pnl">PnL (usdt)</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label>Coin:</label>
+                        <input type="text" name="coin" value="" placeholder="BTC" onchange="updateVariable('coin')">
+                        <label>USDT</label>
+                    </div>
+
+                    <div>
+                        <label>Position:</label>
+                        <select name="option">
+                            <option value="Long">Long</option>
+                            <option value="Short">Short</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label>Leverage:</label>
+                        <input type="text" name="leverage" value="" placeholder="50" maxlength="2" onchange="updateVariable('leverage')">
+                        <label>.0X</label>
+                    </div>
+
+                    <div>
+                        <label>Entry price:</label>
+                        <input type="text" name="entry_price" value="" placeholder="1,234.56" onchange="updateVariable('entry_price')">
+                    </div>
+
+                    <div>
+                        <label>Exit price:</label>
+                        <input type="text" name="exit_price" value="" placeholder="1,234.56">
+                    </div>
+
+                    <div>
+                        <label>Margin:</label>
+                        <input type="text" name="margin" value="" placeholder="1,234.56" onchange="updateVariable('margin')">
+                    </div>
+                </form>
+            </div>
+
+            <!-- Кнопка "Сохранить" и другие -->
+            <div class="app_right">
+                <div class="form_buttons">
+                    <button type="button" onclick="saveScreenshot()" class="get_ss_btn">Save Screenshot</button>
+                    <button type="button" onclick="testCalculation()" class="calculation_btn">Test calculation</button>
+                    <button type="button" onclick="clearForm()" class="clear_form_btn">Clear form</button>
+                </div>
+                <div class="calculation_results">
+                    <span>
+                        <span id="roi_pnl_example">PNL / ROI: -</span>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Лейаут будущего скрина -->
+        <div class="pnl" id="screenshot">
+            <div class="pnl_content">
+                <div class="pnl_header">
+                    <span class="coin_name" id="coin">DOGEUSDT</span>
+                    <span id="leverage" class="leverage">Long 20.0X</span>
+                </div>
+                <span id="roipnl" class="roipnl">+2.09%</span>
+                <span id="entry_price" class="entry_price">0.22006</span>
+                <span id="exit_price" class="exit_price">0.22029</span>
+            </div>
+        </div>
+
+
+</body></html>

@@ -1,0 +1,153 @@
+<html><head>
+        <title>Position</title>
+
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Jersey+15&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+
+        <link rel="stylesheet" href="/styles/position.css">
+<link rel="stylesheet" href="/styles/main.css">
+
+        <script type="text/javascript" src="js/main.js"></script>
+        <script type="text/javascript" src="js/position.js"></script>
+        <script type="text/javascript" src="js/html2canvas.js"></script>
+    </head>
+
+    <body>
+        <div class="container">
+            <!-- Меню сайта -->
+            <div class="app_left">
+                <div class="menu">
+                    <a class="menu_btn current" href="/pages/position">Position</a>
+                    <a class="menu_btn" href="/pages/pnl">P&L / ROI</a>
+                    <a class="menu_btn" href="/pages/balance">Balance</a>
+                    <a class="menu_btn" href="/pages/bot">Bot</a>
+                    <a class="menu_btn" href="/pages/withdrawal">Withdrawal</a>
+                    <a class="menu_btn" href="/pages/waxp">WAXP</a>
+                </div>
+            </div>
+
+            <!-- Форма с полями ввода -->
+            <div class="app_center">
+                <form class="form" name="form">
+                    <div>
+                        <label>Time:</label>
+                        <input id="input_time" type="time" name="time" placeholder="12:34">
+                    </div>
+
+                    <div>
+                        <label>Battery:</label>
+                        <select name="battery">
+                            <option value="10">10</option>
+                            <option value="50">50</option>
+                            <option value="90">90</option>
+                        </select>
+                        <label>%</label>
+                    </div>
+
+                    <div>
+                        <label>Coin:</label>
+                        <input type="text" name="coin" placeholder="BTC" onchange="updateVariable('coin')">
+                        <label>USDT</label>
+                    </div>
+
+                    <div>
+                        <label>Position:</label>
+                        <select name="longshort">
+                            <option value="Long">Long</option>
+                            <option value="Short">Short</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label>Leverage:</label>
+                        <input type="text" name="leverage" placeholder="50" maxlength="2" onchange="updateVariable('leverage')">
+                        <label>.00x</label>
+                    </div>
+
+                    <div>
+                        <label>Entry price:</label>
+                        <input type="text" name="entry_price" placeholder="1,234.56" onchange="updateVariable('entry_price')">
+                    </div>
+
+                    <div>
+                        <label>Margin:</label>
+                        <input type="text" name="margin" placeholder="1,234.56" onchange="updateVariable('margin')">
+                    </div>
+
+                    <div>
+                        <label>Liq. price:</label>
+                        <input type="text" name="liq_price" placeholder="1,234.56">
+                    </div>
+
+                    <div>
+                        <label>Take Profit:</label>
+                        <input type="text" name="take_profit" placeholder="1,234.56">
+                    </div>
+                </form>
+            </div>
+
+            <!-- Кнопка "Сохранить" и тп -->
+            <div class="app_right">
+                <div class="form_buttons">
+                    <button type="button" onclick="saveScreenshot()" class="get_ss_btn">Save Screenshot</button>
+                    <button type="button" onclick="calcTestData()" class="calculation_btn">Test calculation</button>
+                    <button type="button" onclick="clearForm()" class="clear_form_btn">Clear form</button>
+                </div>
+                <div class="calculation_results">
+                    <span>
+                        <span>Unrealized Pnl: </span>
+                        <span id="unr_pnl_example">0 USDT (0%)</span>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="iphone_screen" id="screenshot">
+            <!-- Шапка экрана айфона -->
+            <div class="top_bar">
+                <span class="iphone_time" id="iphone_time">11:09</span>
+                <div class="iphone_icons" id="iphone_icons"></div>
+            </div>
+
+            <!-- Тело позиции -->
+            <div class="position">
+                <div class="position_header">
+                    <span class="coin_name" id="coin">BTCUSDT</span>
+                    <span id="longshort" class="longshort">Long</span>
+                    <span id="leverage" class="leverage">Cross 50.00x</span>
+                </div>
+
+                <div class="position_body">
+                    <span id="position_size" class="position_size">6.735</span>
+                    <span id="entry_price" class="entry_price">1,848.91</span>
+                    <span id="mark_price" class="mark_price">2,485.37</span>
+                    <span id="liq_price" class="liq_price">31,216.10</span>
+                    <span id="value" class="value">51,731.0050</span>
+                    <span id="unr_pnl" class="unr_pnl">-17,807.6355 USDT (-1721.18%)</span>
+                    <span id="unr_pnl_rounded" class="unr_pnl_rounded">≈ -17807.64 USD</span>
+                    <span id="r_pnl" class="r_pnl">-31.0386 USDT</span>
+                    <span id="r_pnl_rounded" class="r_pnl_rounded">≈ -31.04 USD</span>
+                    <span id="margin" class="margin">1,034.6201 USDT</span>
+                    <span id="mm" class="mm">40.1201 USDT</span>
+                    <span id="tp" class="tp">
+                        <span>
+                            <span>Entire Position:</span>
+                            <span id="tp_value">64,781.5</span>
+                        </span>
+                        <span>/</span>
+                        <span>--</span>
+                        <span>Partial Position: 0</span>
+                    </span>
+                    <span class="tp_plug" id="tp_plug">Set TP/SL</span>
+                </div>
+            </div>
+        </div>
+
+
+</body></html>
